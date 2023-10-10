@@ -1,0 +1,27 @@
+[project]
+name = ""
+version = ""
+authors = [
+    { name="Example Author", email="author@example.com" },
+    {name = "AleDore", email = "alessio85.dore@gmail.com"},
+]
+description = ""
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "requests>=2.31.0",
+    "flask>=3.0.0",
+]
+license = {text = "MIT"}
+
+[project.urls]
+"Homepage" = "https://github.com/pypa/sampleproject"
+"Bug Tracker" = "https://github.com/pypa/sampleproject/issues"
+
+[tool.pdm.scripts]
+start_server = "flask run -p 54321" 
