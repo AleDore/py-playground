@@ -1,6 +1,5 @@
 import os
 from flask import Flask, jsonify, request, Response
-import json
 from controllers.UserController import UserController
 
 from utils.database import db
@@ -19,7 +18,7 @@ with app.app_context():
     db.drop_all()
     db.create_all()
 
-userController = UserController()
+userController = UserController(db.session())
 
 
 @app.route("/ping")
@@ -31,8 +30,19 @@ def ping():
 def createUser():
     userJson = request.get_json(True)
     code, user = userController.createUser(userJson)
-    print(user)
     return jsonify(user), code
+
+
+@app.route("/users/<userId>")
+def getUser(userId):
+    code, user = userController.getUser(userId)
+    return jsonify(user), code
+
+
+@app.route("/users")
+def getUsers():
+    code, users = userController.getUsers()
+    return jsonify(users), code
 
 
 if __name__ == "__main__":
