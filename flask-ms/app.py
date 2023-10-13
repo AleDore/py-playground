@@ -18,7 +18,7 @@ with app.app_context():
     db.drop_all()
     db.create_all()
 
-userController = UserController(db.session())
+userController = UserController(db.session)
 
 
 @app.route("/ping")

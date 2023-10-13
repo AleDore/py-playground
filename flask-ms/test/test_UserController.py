@@ -17,10 +17,17 @@ def fakeUserData() -> Any:
 
 
 class UserControllerTest(unittest.TestCase):
+    def test_userCreateTest(self):
+        dbSession = MagicMock()
+        dbSession.query.return_value.filter_by.return_value.count.return_value = 0
+        uc = UserController(dbSession)
+        code, _ = uc.createUser(fakeUserData())
+        self.assertEqual(code, 200)
+
     def test_userCreateTestWithAlreadyExistingConflict(self):
         dbSession = MagicMock()
+        dbSession.query.return_value.filter_by.return_value.count.return_value = 1
         uc = UserController(dbSession)
-        dbSession.query(User).filter_by().count = MagicMock(returnValue=1)
         code, _ = uc.createUser(fakeUserData())
         self.assertEqual(code, 409)
 
